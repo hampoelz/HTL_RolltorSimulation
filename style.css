@@ -139,7 +139,7 @@ body {
 .container .photoelectric-barrier .laser.interrupted {
     width: 0;
     animation-name: laser-interrupt;
-    animation-duration: 1s;
+    animation-duration: .3s;
 }
 
 .controls {
