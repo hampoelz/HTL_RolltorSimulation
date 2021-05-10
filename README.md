@@ -1,5 +1,5 @@
 # 🥅 Rolltor Simulation
-ℹ Eine kleine Aufgabenstellung der [HTL Weiz](https://htlweiz.at/), bei dem ein Rolltor gesteuert werden soll.
+ℹ Eine kleine Aufgabenstellung der [HTL Weiz](https://htlweiz.at/), bei der ein Rolltor gesteuert werden soll.
 
 **➡ Die Simulation kann unter [/simulation.html](https://hampoelz.github.io/RolltorSimulation/simulation.html) gefunden werden.**
 
