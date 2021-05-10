@@ -1,0 +1,186 @@
+:root {
+  --space: 1vh;
+  --fence-width: 50vh;
+  --sensor-width: 3vh;
+  --fence-height: 20vh;
+  --sensor-height: 1vh;
+  --laser-height: .2vh;
+  --fence-grid: .3vh;
+  --fence-border: .5vh;
+  --fence-background-size: 4vh;
+  --fence-padding: calc(var(--fence-background-size) - var(--fence-grid));
+  --sensor-border: .3vh;
+  --fence-color: #000000;
+  --laser-color: #FF0000;
+  --sensor-color: #000000;
+  --limit-switch-color: #880000;
+  --limit-switch-active-color: #008000;
+  --photoelectric-barrier-sensor-color: #6495ED;
+  --photoelectric-barrier-mirror-color: #000000;
+}
+
+body {
+    margin: 5vh;
+    padding: 0vh;
+}
+
+.container {
+    position: relative;
+}
+
+.container .fence {
+    position: absolute;
+    top: var(--space);
+    left: calc(2*var(--sensor-border) + var(--sensor-width));
+    height: var(--fence-height);
+    width: var(--fence-width);
+    border: var(--fence-border);
+    border-color: var(--fence-color);
+    border-style: solid;
+    padding: 0em var(--fence-padding);
+    background: linear-gradient(90deg, var(--fence-color) var(--fence-grid), transparent var(--fence-grid));
+    background-size: var(--fence-background-size);
+    background-origin: content-box;    
+}
+
+.container .cover {
+    position: absolute;
+    height: calc(3*var(--space) + 2*var(--fence-border) + var(--fence-height) + 2*var(--sensor-border) + var(--sensor-height)); 
+    background-color: rgba(255, 255, 255, .3);
+    backdrop-filter: blur(.25vh);
+    border: .1vh;
+    border-color: #000000;
+    border-style: dashed;
+}
+
+.container .cover.right {
+    left: calc(-1*var(--space));
+    width: calc(2*var(--space) + 2*var(--sensor-border) + var(--sensor-width));
+}
+
+.container .cover.left {
+    left: calc(2*var(--sensor-border) + var(--sensor-width) + var(--fence-width) - var(--space));
+    width: calc(2*var(--sensor-border) + var(--sensor-width) + 2*var(--fence-border) + 2*var(--fence-padding) + var(--fence-width) + 2*var(--space));
+}
+
+.container .limit-switch {
+    position: absolute;
+    top: calc(2*var(--fence-border) + var(--fence-height) - 2*var(--sensor-border) - var(--sensor-height));
+    height: var(--sensor-height);
+    width: var(--sensor-width);
+    background-color: var(--limit-switch-color);
+    border: var(--sensor-border);
+    border-color: var(--sensor-color);
+    border-style: solid;
+}
+
+.container .limit-switch.active {
+    background-color: var(--limit-switch-active-color);
+}
+
+.container .limit-switch.closed {
+    left: 0;
+}
+
+.container .limit-switch.opened {
+    left: calc(2*var(--sensor-border) + var(--sensor-width) + 2*var(--fence-border) + 2*var(--fence-padding) + 2*var(--fence-width));
+}
+
+.container .photoelectric-barrier {
+    position: absolute;
+    top: calc(2*var(--space) + 2*var(--fence-border) + var(--fence-height));
+    height: var(--sensor-height);
+}
+
+.container .photoelectric-barrier .sensor {
+    position: absolute;
+    left: 0;
+    height: var(--sensor-height);
+    width: var(--sensor-width);
+    border: var(--sensor-border);
+    border-color: var(--sensor-color);
+    border-style: solid;
+    background-color: var(--photoelectric-barrier-sensor-color);
+}
+
+.container .photoelectric-barrier .mirror {
+    position: absolute;
+    left: calc(2*var(--sensor-border) + var(--sensor-width) + var(--fence-width));
+    height: var(--sensor-height);
+    width: var(--sensor-height);
+    border: var(--sensor-border);
+    border-color: var(--sensor-colors);
+    border-style: solid;
+    background-color: var(--photoelectric-barrier-mirror-color);
+}
+
+@keyframes laser {
+    from { width: 0; }
+    to { width: var(--fence-width); }
+}
+
+.container .photoelectric-barrier .laser {
+    position: absolute;
+    top: calc(var(--sensor-height)/2 + var(--laser-height));
+    left: calc(2*var(--sensor-border) + var(--sensor-width));
+    height: var(--laser-height);
+    width: var(--fence-width);
+    background-color: var(--laser-color);
+    animation-name: laser;
+    animation-duration: .3s;
+}
+
+@keyframes laser-interrupt {
+    from { width: var(--fence-width); }
+    to { width: 0; }
+}
+
+.container .photoelectric-barrier .laser.interrupted {
+    width: 0;
+    animation-name: laser-interrupt;
+    animation-duration: 1s;
+}
+
+.controls {
+    position: relative;
+    top: calc(5*var(--space) + 2*var(--fence-border) + var(--fence-height) + 2*var(--sensor-border) + var(--sensor-height));
+    width: fit-content;
+    border: var(--sensor-border);
+    border-color: var(--sensor-color);
+    border-style: dashed;
+    padding: calc(var(--space)/2);
+    overflow: hidden;
+    user-select: none;
+}
+
+.controls .button {
+    display: inline-block;    
+    border-radius: var(--sensor-border);
+    margin: calc(var(--space)/2);
+    padding: var(--space);
+    background-color: #1E90FF;
+    color: #FFFFFF;
+    text-align: center;
+    text-decoration: none;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 16px;
+}
+.controls .button:hover {
+    background-color: #1564B2;
+}
+
+.controls .button:active {
+    background-color: #1771CB;
+}
+
+.controls .button.special {
+    background-color: #425D93;
+}
+
+.controls .button.special:hover {
+    background-color: #1F2C46;
+}
+
+.controls .button.special:active {
+    background-color: #2F446C;
+}
