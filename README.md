@@ -5,7 +5,7 @@
 
 ✔ Die Steuerung sollte auf einem Arduino stattfinden. Deshalb wurde bei der Simulation ein Webworker eingesetzt, um eine Endlosschleife zu verwirklichen. Ohne Webworker würde die Rolltor-Steuerung im UI Thread ausgeführt werden und die Simulation würde einfrieren, da die Schleife den Haupt-Thread blockiert. 
 
-_❌ Die Steuerung könnte natürlich auch um einiges einfacher mit einem Intervall im UI Thread verwirklicht werden. Allerdings würde dabei der Browser die Zyklen steuern, dabei würde die Steuerung nur alle x Sekunden ausgeführt werden und es bestände keine Ähnlichkeit mit einem Arduino._
+🤔 _Die Steuerung könnte natürlich auch um einiges einfacher mit einem Intervall im UI Thread verwirklicht werden. Allerdings würde dabei der Browser die Zyklen steuern, dabei würde die Steuerung nur alle x Sekunden ausgeführt werden und es bestände keine Ähnlichkeit mit einem Arduino._
 
 ## Aufgabenstellung
 Ein Rolltor soll gesteuert werden.
