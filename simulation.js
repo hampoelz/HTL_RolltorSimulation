@@ -31,17 +31,17 @@ document.addEventListener("DOMContentLoaded", async () => {
                 if (isStarted) return;
                 isStarted = true;
 
-                openButton.addEventListener('mousedown', () => inputs.open = true);
-                openButton.addEventListener('mouseup', () => inputs.open = false);
+                openButton.addEventListener('pointerdown', () => inputs.open = true);
+                openButton.addEventListener('pointerup', () => inputs.open = false);
 
-                closeButton.addEventListener('mousedown', () => inputs.close = true);
-                closeButton.addEventListener('mouseup', () => inputs.close = false);
+                closeButton.addEventListener('pointerdown', () => inputs.close = true);
+                closeButton.addEventListener('pointerup', () => inputs.close = false);
 
-                stopButton.addEventListener('mousedown', () => inputs.stop = true);
-                stopButton.addEventListener('mouseup', () => inputs.stop = false);
+                stopButton.addEventListener('pointerdown', () => inputs.stop = true);
+                stopButton.addEventListener('pointerup', () => inputs.stop = false);
 
-                photoelectricBarrier.addEventListener('mousedown', () => inputs.photoelectricBarrier = true);
-                photoelectricBarrier.addEventListener('mouseup', () => inputs.photoelectricBarrier = false);
+                photoelectricBarrier.addEventListener('pointerdown', () => inputs.photoelectricBarrier = true);
+                photoelectricBarrier.addEventListener('pointerup', () => inputs.photoelectricBarrier = false);
 
                 // Update the user interface every millisecond
                 setInterval(() => {
