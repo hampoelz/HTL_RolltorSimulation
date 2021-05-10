@@ -1,15 +1,16 @@
 :root {
-  --space: 1vh;
-  --fence-width: 50vh;
-  --sensor-width: 3vh;
-  --fence-height: 20vh;
-  --sensor-height: 1vh;
-  --laser-height: .2vh;
-  --fence-grid: .3vh;
-  --fence-border: .5vh;
-  --fence-background-size: 4vh;
+  --space: 10px;
+  --fence-width: 600px;
+  --sensor-width: 40px;
+  --fence-height: 200px;
+  --sensor-height: 15px;
+  --laser-height: 3px;
+  --fence-grid: 3px;
+  --fence-border: 5px;
+  --fence-background-size: 50px;
   --fence-padding: calc(var(--fence-background-size) - var(--fence-grid));
-  --sensor-border: .3vh;
+  --sensor-border: 2px;
+  --font-size: 14pt;
   --fence-color: #000000;
   --laser-color: #FF0000;
   --sensor-color: #000000;
@@ -163,7 +164,7 @@ body {
     text-align: center;
     text-decoration: none;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 16px;
+    font-size: var(--font-size);
 }
 .controls .button:hover {
     background-color: #1564B2;
