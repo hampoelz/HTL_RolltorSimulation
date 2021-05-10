@@ -34,7 +34,7 @@ async function Logic() {
         }
 
         // Open fence when close button was clicked or photoelectric barrier was interrupted
-        if (isOpenButtonClicked || isPhotoelectricBarrierInterrupted) {
+        if (isOpenButtonClicked || (!isFenceClosed && isPhotoelectricBarrierInterrupted)) {
             openFence = true;
             closeFence = false;
         }
