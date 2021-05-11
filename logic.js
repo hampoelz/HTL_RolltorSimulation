@@ -51,7 +51,7 @@ async function Logic() {
 
         // Close fence with a on-delay after it has been opened when the photoelectric barrier has been interrupted
         if (!isFenceClosed && !isFenceOpened && isPhotoelectricBarrierInterrupted) {
-            log("Light barrier interrupted  --> Open fence and start close Delay");
+            log("Light barrier interrupted  --> Open fence and start close-delay");
             closeFenceWithDelay = true;
             openFence = true;
             closeFence = false;
@@ -59,14 +59,14 @@ async function Logic() {
 
         // Start on-delay to close fence when it is open and the photoelectric barrier is no longer interrupted.
         if (isFenceOpened && !isPhotoelectricBarrierInterrupted && closeFenceWithDelay) {
-            log("Fence is open              --> Start 10 second close delay");
+            log("Fence is open              --> Start 10 second close-delay");
             closeFenceWithDelay = false;
             delay = time;
         }
 
         // Clear on-delay when stop button was clicked
         if (isStopButtonClicked && (delay != 0 || closeFenceWithDelay)) {
-            log("Stop button clicked        --> Clear delay");
+            log("Stop button clicked        --> Clear close-delay");
             closeFenceWithDelay = false;
             delay = 0;
         }
