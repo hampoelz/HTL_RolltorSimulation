@@ -81,7 +81,7 @@ async function Logic() {
 
         // Stop fence when a limit-switch is active
         if ((isFenceClosed && !openFence) || (isFenceOpened && !closeFence)) {
-            log("Limit switch activated     --> Stop fence");
+            log("Limit switch activated     --> Stop motor");
             openFence = false;
             closeFence = false;
         }
