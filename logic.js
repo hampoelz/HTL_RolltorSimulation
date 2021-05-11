@@ -7,7 +7,7 @@ async function Logic() {
         while (true) await loop();
     }
 
-    let delay;
+    let delay = 0;
     let closeFenceWithDelay = false;
     
     let openFence = false;
@@ -26,6 +26,10 @@ async function Logic() {
         const moveFenceRight = () => SimulationBridge().moveFenceRight();       // Motor_Rechts --> 1
         const moveFenceLeft = () => SimulationBridge().moveFenceLeft();         // Motor_ Links --> 1
         const stopFence = () => SimulationBridge().stopFence();  // Motor_Rechts & Motor_ Links --> 0
+
+        // Get current date
+        const date = new Date();
+        const time = date.getTime();
 
         // Close fence when close button was clicked
         if (isCloseButtonClicked) {
@@ -49,22 +53,20 @@ async function Logic() {
         }
 
         // Clear on-delay when stop button was clicked
-        if (isStopButtonClicked && delay != undefined) {
-            clearTimeout(delay);
-            delay = undefined;
-        }
+        if (isStopButtonClicked && delay != 0) delay = 0;
 
         // Start with on-delay to close fence when it is open and the photoelectric barrier is no longer interrupted.
         // Also check whether no other on-delay is currently active
-        if (isFenceOpened && !isPhotoelectricBarrierInterrupted && closeFenceWithDelay && delay == undefined) {
+        if (isFenceOpened && !isPhotoelectricBarrierInterrupted && closeFenceWithDelay && delay == 0) {
             closeFenceWithDelay = false;
+            delay = time;
+        }
 
-            // Close fence after 10 seconds
-            delay = setTimeout(() => {
-                openFence = false;
-                closeFence = true;
-                delay = undefined;
-            }, 10000);
+        // Close fence after 10 seconds if there is an active on-delay
+        if (delay != 0 && time > delay + 10000) {
+            openFence = false;
+            closeFence = true;
+            delay = 0;
         }
 
         // Set outputs
