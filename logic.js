@@ -95,9 +95,7 @@ async function Logic() {
     let oldMessage = "";
     function log(message) {
         if (message.toUpperCase() === oldMessage.toUpperCase()) return;
-
-        self.postMessage({ channel: "debug", content: message })
-
+        self.postMessage({ channel: "debug", content: message });
         oldMessage = message;
     }
 
