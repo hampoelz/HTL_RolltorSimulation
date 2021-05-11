@@ -185,3 +185,14 @@ body {
 .controls .button.special:active {
     background-color: #2F446C;
 }
+
+#debug {
+    position: relative;
+    top: calc(5*var(--space) + 2*var(--fence-border) + var(--fence-height) + 2*var(--sensor-border) + var(--sensor-height));
+    white-space: pre-wrap;
+}
+
+#debug code::before {
+  content: "\A";
+  white-space: pre;
+}

@@ -103,6 +103,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     })();
 
+    const debugDiv = document.getElementById("debug");
+    function debug(message) {
+        var msg = document.createElement('code');
+        msg.textContent = message;
+        debugDiv.prepend(msg);
+    }
+
     // Function bridge for web workers, as the web worker cannot access functions in the UI thread
     worker.onmessage = event => {
         if (event.data == "start") Simulation.start();
@@ -115,6 +122,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         else if (event.data == "moveFenceRight") Simulation.moveFenceRight();
         else if (event.data == "moveFenceLeft") Simulation.moveFenceLeft();
         else if (event.data == "stopFence") Simulation.stopFence();
+        else if (event.data.channel == "debug") debug(event.data.content);
     }
 
     worker.postMessage("load");

@@ -37,42 +37,68 @@ async function Logic() {
             closeFence = true;
         }
 
-        // Open fence when close button was clicked or photoelectric barrier was interrupted
-        if (isOpenButtonClicked || (!isFenceClosed && isPhotoelectricBarrierInterrupted)) {
+        // Open fence when close button was clicked
+        if (isOpenButtonClicked) {
             openFence = true;
             closeFence = false;
         }
         
-        // Close fence with a on-delay after it has been opened when the photoelectric barrier has been interrupted
-        if ((openFence || closeFence) && isPhotoelectricBarrierInterrupted) closeFenceWithDelay = true;
-
-        // Stop fence when stop button was clicked or a limit-switch is active
-        if (isStopButtonClicked || (isFenceClosed && !openFence) || (isFenceOpened && !closeFence)) {
+        // Stop fence when stop button was clicked
+        if (isStopButtonClicked) {
             openFence = false;
             closeFence = false;
         }
 
-        // Clear on-delay when stop button was clicked
-        if (isStopButtonClicked && delay != 0) delay = 0;
+        // Close fence with a on-delay after it has been opened when the photoelectric barrier has been interrupted
+        if (!isFenceClosed && !isFenceOpened && isPhotoelectricBarrierInterrupted) {
+            log("Light barrier interrupted  --> Open fence and start close Delay");
+            closeFenceWithDelay = true;
+            openFence = true;
+            closeFence = false;
+        }
 
-        // Start with on-delay to close fence when it is open and the photoelectric barrier is no longer interrupted.
-        // Also check whether no other on-delay is currently active
-        if (isFenceOpened && !isPhotoelectricBarrierInterrupted && closeFenceWithDelay && delay == 0) {
+        // Start on-delay to close fence when it is open and the photoelectric barrier is no longer interrupted.
+        if (isFenceOpened && !isPhotoelectricBarrierInterrupted && closeFenceWithDelay) {
+            log("Fence is open              --> Start 10 second close delay");
             closeFenceWithDelay = false;
             delay = time;
         }
 
+        // Clear on-delay when stop button was clicked
+        if (isStopButtonClicked && (delay != 0 || closeFenceWithDelay)) {
+            log("Stop button clicked        --> Clear delay");
+            closeFenceWithDelay = false;
+            delay = 0;
+        }
+
         // Close fence after 10 seconds if there is an active on-delay
         if (delay != 0 && time > delay + 10000) {
+            log("Delay expired              --> Close fence");
             openFence = false;
             closeFence = true;
             delay = 0;
+        }
+
+        // Stop fence when a limit-switch is active
+        if ((isFenceClosed && !openFence) || (isFenceOpened && !closeFence)) {
+            log("Limit switch activated     --> Stop fence");
+            openFence = false;
+            closeFence = false;
         }
 
         // Set outputs
         if (openFence) moveFenceRight();
         else if (closeFence) moveFenceLeft();
         else stopFence();
+    }
+
+    let oldMessage = "";
+    function log(message) {
+        if (message.toUpperCase() === oldMessage.toUpperCase()) return;
+
+        self.postMessage({ channel: "debug", content: message })
+
+        oldMessage = message;
     }
 
     return await setup();
