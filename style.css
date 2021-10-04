@@ -26,6 +26,17 @@ body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+#header h1 {
+    position: relative;
+    left: 10px;
+}
+
+#header img {
+    filter: invert(1);
+    float: left;
+    height: 2.5em;
+}
+
 .container {
   position: relative;
 }
