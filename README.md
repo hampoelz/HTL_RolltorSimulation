@@ -1,7 +1,7 @@
 # 🚧 Rolltor Simulation
 ℹ Eine kleine Aufgabenstellung der [HTL Weiz](https://htlweiz.at/), bei der ein Rolltor gesteuert werden soll.
 
-**➡ Die Simulation kann unter [/simulation.html](https://hampoelz.github.io/RolltorSimulation/simulation.html) gefunden werden.**
+**➡ Die Simulation kann unter [/simulation.html](https://hampoelz.github.io/HTL_RolltorSimulation/simulation.html) gefunden werden.**
 
 ✔ Die Steuerung sollte auf einem Arduino stattfinden. Deshalb wurde bei der Simulation ein Webworker eingesetzt, um eine Endlosschleife zu verwirklichen. Ohne Webworker würde die Rolltor-Steuerung im UI Thread ausgeführt werden und die Simulation würde einfrieren, da die Schleife den Haupt-Thread blockiert. 
 
@@ -23,7 +23,7 @@ Folgende Taster sollen für die Bedienung zur Verfügung stehen:
 „Taster_Zu“: Wird der Taster kurz betätigt schließt sich das Tor vollständig.
 
 ## Screenshot
-![Rolltor Simulation](https://raw.github.com/hampoelz/RolltorSimulation/master/screenshot.png)
+![Rolltor Simulation](https://raw.github.com/hampoelz/HTL_RolltorSimulation/master/screenshot.png)
 
 ---
 
